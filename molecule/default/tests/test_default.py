@@ -6,8 +6,9 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def file_installed(host):
-    assert host.file(
-        "/usr/local/share/prometheus_node_exporter-0.18.1/"
-        "node_exporter-0.18.1.linux-amd64/node_exporter"
-    ).is_file
+def service_enabled(host):
+    assert host.service('prometheus_node_exporter').is_enabled
+
+
+def service_running(host):
+    assert host.service('prometheus_node_exporter').is_running
