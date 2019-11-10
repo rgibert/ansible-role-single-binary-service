@@ -15,3 +15,4 @@
       single_binary_service_stop_cmd: "/usr/bin/ps auwwx | grep /usr/local/share/prometheus_node_exporter-{{ single_binary_service_version }}/node_exporter-{{ single_binary_service_version }}.linux-{{ prometheus_node_exporter_arch }}/node_exporter | grep -v grep | awk '{print $2}' | xargs kill -9"
       single_binary_service_user: prometheus
       single_binary_service_version: 0.18.1
+      prometheus_node_exporter_arch: amd64
