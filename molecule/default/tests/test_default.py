@@ -7,4 +7,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 def file_installed(host):
-    assert host.file('/usr/local/share/prometheus_node_exporter-0.18.1/node_exporter-0.18.1.linux-amd64/node_exporter').is_file
+    assert host.file(
+        '/usr/local/share/prometheus_node_exporter-0.18.1/' +
+        'node_exporter-0.18.1.linux-amd64/node_exporter'
+    ).is_file
