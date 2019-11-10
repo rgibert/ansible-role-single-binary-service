@@ -3,4 +3,16 @@
   hosts:
     - all
   roles:
-    - role: rgibert.template-ansible-role
+    - role: rgibert.single_binary_service
+      prometheus_node_exporter_base_url: "https://github.com/prometheus/node_exporter/releases/download"
+      prometheus_node_exporter_dl_url: "{{ prometheus_node_exporter_base_url }}/v{{ single_binary_service_version }}/node_exporter-{{ single_binary_service_version }}.linux-{{ prometheus_node_exporter_arch }}.tar.gz"
+      single_binary_service_checksum: "sha256:{{ prometheus_node_exporter_base_url }}/v{{ single_binary_service_version }}/sha256sums.txt"
+      single_binary_service_dl_url: "{{ prometheus_node_exporter_base_url }}/v{{ single_binary_service_version }}/node_exporter-{{ single_binary_service_version }}.linux-{{ prometheus_node_exporter_arch }}.tar.gz"
+      single_binary_service_group: prometheus
+      single_binary_service_is_archive: true
+      single_binary_service_name: prometheus_node_exporter
+      single_binary_service_start_cmd: "/usr/local/share/prometheus_node_exporter-{{ single_binary_service_version }}/node_exporter-{{ single_binary_service_version }}.linux-{{ prometheus_node_exporter_arch }}/node_exporter"
+      single_binary_service_stop_cmd: "/usr/bin/ps auwwx | grep /usr/local/share/prometheus_node_exporter-{{ single_binary_service_version }}/node_exporter-{{ single_binary_service_version }}.linux-{{ prometheus_node_exporter_arch }}/node_exporter | grep -v grep | awk '{print $2}' | xargs kill -9"
+      single_binary_service_user: prometheus
+      single_binary_service_version: 0.18.1
+      prometheus_node_exporter_arch: amd64
