@@ -1,23 +1,29 @@
 ---
 galaxy_info:
-  role_name: template-ansible-role
+  role_name: single_binary_service
   author: Richard Gibert
   company: Gibert.ca
-  description: FIXME
+  description: Sets up a single binary as a systemd service
   license: GPLv3
-  min_ansible_version: 1.2
+  min_ansible_version: 2.2
   platforms:
     - name: EL
       versions:
         - 6
         - 7
+        - 8
     - name: Ubuntu
       versions:
-        - artful
         - bionic
-        - cosmic
+        - eoan
         - trusty
         - xenial
-  galaxy_tags:
-    - template-ansible-role
-dependencies: []
+  galaxy_tags: []
+dependencies:
+  - role: rgibert.user_setup
+    user_setup_group: "{{ single_binary_service_user }}"
+    user_setup_username: "{{ single_binary_service_group }}"
+    user_setup_shell: /sbin/nologin
+    tags: single_binary_service
+    become: true
+    become_user: root

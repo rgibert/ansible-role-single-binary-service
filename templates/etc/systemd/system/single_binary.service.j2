@@ -1,0 +1,15 @@
+[Unit]
+Description={{ single_binary_service_name }}
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ single_binary_service_user }}
+Group={{ single_binary_service_group }}
+ExecStart={{ single_binary_service_start_cmd }}
+ExecStop={{ single_binary_service_stop_cmd }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

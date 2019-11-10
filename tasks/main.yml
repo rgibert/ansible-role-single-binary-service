@@ -1,2 +1,61 @@
 ---
-# Tasks file for template-ansible-role
+- block:
+
+    - name: create share path
+      file:
+        state: directory
+        path: "{{ single_binary_service_share_path }}"
+        owner: "{{ single_binary_service_user }}"
+        group: "{{ single_binary_service_group }}"
+        mode: "u=rwX,g=rX,o=rX"
+
+    - name: download binary
+      get_url:
+        url: "{{ single_binary_service_dl_url }}"
+        dest: "{{ single_binary_service_share_path }}"
+        checksum: "{{ single_binary_service_checksum }}"
+
+    - name: unpack binary
+      unarchive:
+        src: "{{ single_binary_service_share_path }}/{{ single_binary_service_dl_url | basename }}"
+        dest: "{{ single_binary_service_share_path }}"
+        remote_src: true
+        owner: "{{ single_binary_service_user }}"
+        group: "{{ single_binary_service_group }}"
+        mode: "u=rwx,g=rx,o=rx"
+      notify:
+        - restart service
+      tags:
+        - skip_ansible_lint
+      when:
+        - not ansible_check_mode
+        - single_binary_service_is_archive
+
+    - name: create systemd path
+      file:
+        state: directory
+        path: /etc/systemd/system
+        owner: root
+        group: root
+        mode: "u=rwX,g=rX,o=rX"
+
+    - name: copy service file
+      template:
+        src: etc/systemd/system/single_binary.service.j2
+        dest: "/etc/systemd/system/{{ single_binary_service_name }}.service"
+        owner: root
+        group: root
+        mode: "u=rw,g=r,o=r"
+      notify:
+        - restart service
+
+    - name: enable and start service
+      systemd:
+        name: "{{ single_binary_service_name }}"
+        state: started
+        enabled: true
+
+  become: true
+  become_user: root
+  tags:
+    - single_binary_service

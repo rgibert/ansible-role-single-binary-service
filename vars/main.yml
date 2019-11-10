@@ -1,0 +1,2 @@
+---
+single_binary_service_share_path: "/usr/local/share/{{ single_binary_service_name }}-{{ single_binary_service_version }}"

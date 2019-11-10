@@ -3,4 +3,4 @@
   hosts:
     - all
   roles:
-    - role: rgibert.template-ansible-role
+    - role: rgibert.single_binary_service
