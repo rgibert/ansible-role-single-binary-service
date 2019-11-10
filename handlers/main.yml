@@ -3,4 +3,3 @@
   systemd:
     name: "{{ single_binary_service_name }}"
     state: restarted
-

@@ -15,9 +15,13 @@
         dest: "{{ single_binary_service_share_path }}"
         checksum: "{{ single_binary_service_checksum }}"
 
+    - name: set filename
+      set_fact:
+        single_binary_service_dl_file: "{{ single_binary_service_dl_url | basename }}"
+
     - name: unpack binary
       unarchive:
-        src: "{{ single_binary_service_share_path }}/{{ single_binary_service_dl_url | basename }}"
+        src: "{{ single_binary_service_share_path }}/{{ single_binary_service_dl_file }}"
         dest: "{{ single_binary_service_share_path }}"
         remote_src: true
         owner: "{{ single_binary_service_user }}"
