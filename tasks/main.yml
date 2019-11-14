@@ -56,6 +56,7 @@
         name: "{{ single_binary_service_name }}"
         state: started
         enabled: true
+        daemon_reload: true
 
   become: true
   become_user: root
