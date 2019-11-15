@@ -1,9 +1,9 @@
 # Single Binary Service
 
-![Ansible Role](https://img.shields.io/ansible/role/ANSIBLE_GALAXY_ID?style=flat-square)
+![Ansible Role](https://img.shields.io/ansible/role/44520?style=flat-square)
 ![Molecule Test Status](https://img.shields.io/travis/rgibert/ansible-role-single-binary-service?label=molecule&style=flat-square)
-![Ansible Quality Score](https://img.shields.io/ansible/quality/ANSIBLE_GALAXY_ID?style=flat-square)
-![Ansible Role](https://img.shields.io/ansible/role/d/ANSIBLE_GALAXY_ID?label=downloads&style=flat-square)
+![Ansible Quality Score](https://img.shields.io/ansible/quality/44520?style=flat-square)
+![Ansible Role](https://img.shields.io/ansible/role/d/44520?label=downloads&style=flat-square)
 
 ## Description
 
