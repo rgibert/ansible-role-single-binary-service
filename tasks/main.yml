@@ -15,9 +15,13 @@
         dest: "{{ single_binary_service_share_path }}"
         checksum: "{{ single_binary_service_checksum }}"
 
-    - name: set filename
+    - name: get filename
       set_fact:
         single_binary_service_dl_file: "{{ single_binary_service_dl_url | basename }}"
+
+    - name: get file extension
+      set_fact:
+        single_binary_service_dl_ext: "{{ single_binary_service_dl_file | splitext }}"
 
     - name: unpack binary
       unarchive:
@@ -31,9 +35,10 @@
         - restart service
       tags:
         - skip_ansible_lint
-      when:
-        - not ansible_check_mode
-        - single_binary_service_is_archive
+      when: not ansible_check_mode|bool and
+        single_binary_service_dl_ext[1] != '.gz' and
+        single_binary_service_dl_ext[1] != '.tgz' and
+        single_binary_service_dl_ext[1] != '.zip'
 
     - name: create systemd path
       file:
