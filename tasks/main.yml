@@ -35,10 +35,10 @@
         - restart service
       tags:
         - skip_ansible_lint
-      when: not ansible_check_mode|bool and
-        single_binary_service_dl_ext[1] != '.gz' and
-        single_binary_service_dl_ext[1] != '.tgz' and
-        single_binary_service_dl_ext[1] != '.zip'
+      when: not ansible_check_mode|bool and (
+        single_binary_service_dl_ext[1] == '.gz' or
+        single_binary_service_dl_ext[1] == '.tgz' or
+        single_binary_service_dl_ext[1] == '.zip')
 
     - name: create systemd path
       file:
