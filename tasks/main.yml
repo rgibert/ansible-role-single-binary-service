@@ -21,7 +21,7 @@
 
     - name: get file extension
       set_fact:
-        single_binary_service_dl_ext: "{{ single_binary_service_dl_file | splitext }}"
+        single_binary_service_dl_ext: "{{ (single_binary_service_dl_file | splitext)[1] }}"
 
     - name: unpack binary
       unarchive:
@@ -35,10 +35,10 @@
         - restart service
       tags:
         - skip_ansible_lint
-      when: not ansible_check_mode|bool and
-        single_binary_service_dl_ext[1] != '.gz' and
-        single_binary_service_dl_ext[1] != '.tgz' and
-        single_binary_service_dl_ext[1] != '.zip'
+      when: not ansible_check_mode|bool and (
+        single_binary_service_dl_ext == '.gz' or
+        single_binary_service_dl_ext == '.tgz' or
+        single_binary_service_dl_ext == '.zip')
 
     - name: create systemd path
       file:
