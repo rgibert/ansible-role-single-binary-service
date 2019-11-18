@@ -33,8 +33,6 @@
         mode: "u=rwx,g=rx,o=rx"
       notify:
         - restart service
-      tags:
-        - skip_ansible_lint
       when: not ansible_check_mode|bool and (
         single_binary_service_dl_ext == '.gz' or
         single_binary_service_dl_ext == '.tgz' or
