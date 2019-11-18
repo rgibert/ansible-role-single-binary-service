@@ -48,13 +48,24 @@
         group: root
         mode: "u=rwX,g=rX,o=rX"
 
-    - name: copy service file
+    - name: copy files
       template:
-        src: etc/systemd/system/single_binary.service.j2
-        dest: "/etc/systemd/system/{{ single_binary_service_name }}.service"
-        owner: root
-        group: root
-        mode: "u=rw,g=r,o=r"
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: "{{ item.owner }}"
+        group: "{{ item.group }}"
+        mode: "{{ item.mode }}"
+      loop:
+        - src: "bin/single_binary_service.sh.j2"
+          dest: "{{ single_binary_service_share_path }}/{{ single_binary_service_name }}.sh"
+          owner: "{{ single_binary_service_user }}"
+          group: "{{ single_binary_service_group }}"
+          mode: "u=rwx,g=rx,o=rx"
+        - src: "etc/systemd/system/single_binary.service.j2"
+          dest: "/etc/systemd/system/{{ single_binary_service_name }}.service"
+          owner: root
+          group: root
+          mode: "u=rw,g=r,o=r"
       notify:
         - restart service
 
