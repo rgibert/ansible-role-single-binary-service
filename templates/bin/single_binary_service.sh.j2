@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+case ${1} in
+start)
+  {{ single_binary_service_start_cmd }}
+  ;;
+stop)
+  {{ single_binary_service_stop_cmd }}
+  ;;
+*)
+  echo "invalid argument, should be either start or stop"
+  exit 1
+  ;;
+esac

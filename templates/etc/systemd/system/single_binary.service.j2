@@ -7,8 +7,8 @@ After=network-online.target
 Type=simple
 User={{ single_binary_service_user }}
 Group={{ single_binary_service_group }}
-ExecStart={{ single_binary_service_start_cmd }}
-ExecStop={{ single_binary_service_stop_cmd }}
+ExecStart={{ single_binary_service_share_path }}/{{ single_binary_service_name }}.sh start
+ExecStop={{ single_binary_service_share_path }}/{{ single_binary_service_name }}.sh stop
 Restart=on-failure
 
 [Install]
