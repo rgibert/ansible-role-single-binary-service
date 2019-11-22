@@ -40,7 +40,7 @@
 
     - name: make files +x
       file:
-        src: "{{ item }}"
+        path: "{{ item }}"
         mode: "u=rwx,g=rx,o=rx"
       loop: "{{ single_binary_service_exec_files }}"
 
