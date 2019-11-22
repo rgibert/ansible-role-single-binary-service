@@ -11,7 +11,7 @@ Ansible role to install a single binary as a systemd service
 
 ## Requirements
 
-- none
+- RHEL-based or Debian-based OS
 
 ## Role Variables
 
@@ -19,6 +19,7 @@ Ansible role to install a single binary as a systemd service
 |----------|-------------|
 | single_binary_service_checksum | Checksum of the download file |
 | single_binary_service_dl_url | Download target |
+| single_binary_service_exec_files | Files (relative to single_binary_service_share_path) to make +x |
 | single_binary_service_group | Primary group of the single_binary_service_user |
 | single_binary_service_name | Service name |
 | single_binary_service_share_path | Shared path to install to |

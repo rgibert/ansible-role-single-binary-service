@@ -38,6 +38,12 @@
         single_binary_service_dl_ext == '.tgz' or
         single_binary_service_dl_ext == '.zip')
 
+    - name: make files +x
+      file:
+        src: "{{ item }}"
+        mode: "u=rwx,g=rx,o=rx"
+      loop: "{{ single_binary_service_exec_files }}"
+
     - name: create systemd path
       file:
         state: directory
