@@ -3,3 +3,4 @@
 **/*.vault
 **/vault_*
 **/.swp
+.cache/

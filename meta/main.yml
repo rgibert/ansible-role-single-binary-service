@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   role_name: single_binary_service
+  namespace: rgibert
   author: Richard Gibert
   company: Gibert.ca
   description: Sets up a single binary as a systemd service

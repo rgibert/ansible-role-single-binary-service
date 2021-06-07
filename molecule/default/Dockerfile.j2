@@ -1,16 +1,24 @@
 # Molecule managed
 
-
 {% if item.registry is defined %}
 FROM {{ item.registry.url }}/{{ item.image }}
 {% else %}
 FROM {{ item.image }}
 {% endif %}
 
+LABEL org.opencontainers.image.authors="richard@gibert.ca"
 
-RUN if [ $(command -v apt-get) ]; then apt-get update && apt-get install -y python sudo bash ca-certificates && apt-get clean; \
-    elif [ $(command -v dnf) ]; then dnf makecache && dnf --assumeyes install python sudo python-devel python2-dnf bash && dnf clean all; \
-    elif [ $(command -v yum) ]; then yum makecache fast && yum install -y python sudo yum-plugin-ovl bash && sed -i 's/plugins=0/plugins=1/g' /etc/yum.conf && yum clean all; \
-    elif [ $(command -v zypper) ]; then zypper refresh && zypper install -y python sudo bash python-xml && zypper clean -a; \
+ENV \
+    systemctl_version="v1.5.4505" \
+    systemctl_sha256sum="56ed3e408f55d241576dc679c58c53a063b726c1258f7a15dbd35468df5f3444"
+
+RUN \
+    if [ $(command -v apt-get) ]; then apt-get update && apt-get install -y python sudo bash ca-certificates && apt-get clean; \
+    elif [ $(command -v yum) ]; then yum makecache fast && yum install -y python3 sudo yum-plugin-ovl bash && sed -i 's/plugins=0/plugins=1/g' /etc/yum.conf && yum clean all; \
     elif [ $(command -v apk) ]; then apk update && apk add --no-cache python sudo bash ca-certificates; \
-    elif [ $(command -v xbps-install) ]; then xbps-install -Syu && xbps-install -y python sudo bash ca-certificates && xbps-remove -O; fi
+    fi && \
+    curl \
+        https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/${systemctl_version}/files/docker/systemctl.py \
+        -o /usr/local/bin/systemctl && \
+    echo "${systemctl_sha256sum} /usr/local/bin/systemctl" | \
+        sha256sum --check --status
