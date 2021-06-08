@@ -5,4 +5,4 @@ rules:
   line-length: disable
 
 ignore: |
-  .git-hooks/workflows/molecule-test.yml
+  .github/workflows/molecule-test.yml
