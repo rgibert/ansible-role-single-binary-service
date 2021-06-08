@@ -19,6 +19,6 @@ RUN \
     fi && \
     curl \
         https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/${systemctl_version}/files/docker/systemctl.py \
-        -o /usr/local/bin/systemctl && \
-    echo "${systemctl_sha256sum} /usr/local/bin/systemctl" | \
+        -o /usr/bin/systemctl && \
+    echo "${systemctl_sha256sum} /usr/bin/systemctl" | \
         sha256sum --check --status
