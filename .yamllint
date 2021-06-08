@@ -3,3 +3,6 @@ extends: default
 
 rules:
   line-length: disable
+
+ignore: |
+  .git-hooks/workflows/molecule-test.yml
