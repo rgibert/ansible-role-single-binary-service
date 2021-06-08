@@ -14,6 +14,7 @@
         url: "{{ single_binary_service_dl_url }}"
         dest: "{{ single_binary_service_share_path }}"
         checksum: "{{ single_binary_service_checksum }}"
+        force: false
 
     - name: get filename
       set_fact:
