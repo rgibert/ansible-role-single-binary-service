@@ -10,14 +10,12 @@ galaxy_info:
   platforms:
     - name: EL
       versions:
-        - 6
         - 7
+        - 8
     - name: Ubuntu
       versions:
-        - bionic
-        - eoan
-        - trusty
-        - xenial
+        - focal
+        - hirsute
   galaxy_tags: []
 dependencies:
   - role: rgibert.user_setup
