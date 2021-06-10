@@ -12,6 +12,10 @@ platforms:
     image: ${MOLECULE_DISTRO:-centos:7}
 provisioner:
   name: ansible
+  inventory:
+    host_vars:
+      instance:
+        ansible_user: ansible
 scenario:
   name: default
   test_sequence:
