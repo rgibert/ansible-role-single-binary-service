@@ -1,0 +1,49 @@
+---
+argument_specs:
+  main:
+    short_description: The main entry point for the rgibert.single_binary_service role.
+    options:
+      single_binary_service_checksum:
+        type: "str"
+        required: true
+        description: "Checksum of the source download."
+
+      single_binary_service_dl_url:
+        type: "str"
+        required: true
+        description: "URL for the source download."
+
+      single_binary_service_group:
+        type: "str"
+        required: true
+        description: "Group to own the unpacked code."
+
+      single_binary_service_is_archive:
+        type: "bool"
+        required: true
+        description: "Whether the source URL is an archive that needs to be unpacked."
+
+      single_binary_service_name:
+        type: "str"
+        required: true
+        description: "Name for the service file."
+
+      single_binary_service_start_cmd:
+        type: "str"
+        required: true
+        description: "Command to start the service."
+
+      single_binary_service_stop_cmd:
+        type: "str"
+        required: true
+        description: "Command to stop the service."
+
+      single_binary_service_user:
+        type: "str"
+        required: true
+        description: "User to own the unpacked code."
+
+      single_binary_service_version:
+        type: "str"
+        required: true
+        description: "Version of the code"

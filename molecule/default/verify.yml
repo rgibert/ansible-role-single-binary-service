@@ -1,0 +1,31 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: "check binary exists"
+      file:
+        path: "/usr/local/share/prometheus_node_exporter-0.18.1/node_exporter-0.18.1.linux-amd64/node_exporter"
+      check_mode: true
+      register: check_binary
+
+    - name: "check service file exists"
+      file:
+        path: "/etc/systemd/system/prometheus_node_exporter.service"
+      check_mode: true
+      register: check_service_file
+
+    - name: check service enabled
+      service:
+        name: prometheus_node_exporter
+        enabled: true
+      check_mode: true
+      register: check_service_enabled
+
+    - name: "enforce assertions"
+      assert:
+        that:
+          - not {{ item }}.changed
+      with_items:
+        - check_binary
+        - check_service_file
+        - check_service_enabled

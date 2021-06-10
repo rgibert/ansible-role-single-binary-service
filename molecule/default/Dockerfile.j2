@@ -45,3 +45,19 @@ RUN \
     echo "${systemctl_sha256sum} /usr/bin/systemctl" | \
         sha256sum --check --status && \
     chmod 755 /usr/bin/systemctl
+
+ENV \
+    ansible_user=ansible \
+    sudo_group=wheel
+
+RUN \
+    groupadd -r ${ansible_user} && \
+    useradd -m -g ${ansible_user} ${ansible_user} && \
+    usermod -aG ${sudo_group} ${ansible_user} && \
+    usermod -aG ${ansible_user} ${ansible_user} && \
+    mkdir -p /home/${ansible_user} && \
+    chown ${ansible_user}:${ansible_user} /home/${ansible_user} && \
+    chmod 750 /home/${ansible_user} && \
+    sed -i "/^%${sudo_group}/s/ALL\$/NOPASSWD:ALL/g" /etc/sudoers
+
+USER ${ansible_user}
