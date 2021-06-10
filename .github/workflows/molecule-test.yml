@@ -29,9 +29,7 @@ jobs:
             docker \
             flake8 \
             molecule \
-            molecule-docker \
-            pytest \
-            pytest-testinfra
+            molecule-docker
       - name: Run Molecule tests
         run: |
           molecule test
