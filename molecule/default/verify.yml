@@ -21,13 +21,6 @@
       check_mode: true
       register: check_service_enabled
 
-    - name: check service started
-      service:
-        name: prometheus_node_exporter
-        state: started
-      check_mode: true
-      register: check_service_started
-
     - name: "enforce assertions"
       assert:
         that:
@@ -36,4 +29,3 @@
         - check_binary
         - check_service_file
         - check_service_enabled
-        - check_service_started
