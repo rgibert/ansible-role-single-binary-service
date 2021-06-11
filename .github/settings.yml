@@ -1,5 +1,5 @@
 repository:
-  name: ansible-role-single-binary-servicez
+  name: ansible-role-single-binary-service
   description: Generic role for setting up a single binary as a systemd service .
   topics: ansible, ansible-role
   private: false
